@@ -22,6 +22,7 @@ export default function MoviesList() {
           ))}
         </MoviesListWraper>
       )}
+      {fetchError && <p>{fetchError}</p>}
     </Container>
   );
 }
