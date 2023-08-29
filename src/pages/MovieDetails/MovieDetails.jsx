@@ -6,7 +6,6 @@ import {
   NavLink,
   Outlet,
   useLocation,
-  useParams,
 } from 'react-router-dom';
 import routes from 'routes';
 import { Container } from 'styles/Base.styled';
@@ -16,7 +15,7 @@ export default function MovieDetails() {
   const location = useLocation();
   const { movie, isLoading, fetchError } = useFetchMovie();
   const backLinkRef = location?.state?.from ?? '/';
-
+  
   return (
     <Container>
       <Link to={backLinkRef}>Go back</Link>
