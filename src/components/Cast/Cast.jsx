@@ -3,9 +3,9 @@ import { useFetchMovieCredits } from 'hooks/useFetchMovieCredits';
 export default function Cast() {
   const { credits, isLoading, fetchError } = useFetchMovieCredits();
   // const BASE_URL = 'http://image.tmdb.org/t/p/w300';
-  // const { cast } = credits;
+  const { cast } = credits;
   console.log('Credits: ', credits);
-  // console.log('Cast: ', cast);
+  console.log('Cast: ', cast);
   console.log('isLoading: ', isLoading); // just for linter
   console.log('fetchError: ', fetchError); // just for linter
 
