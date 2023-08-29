@@ -1,5 +1,9 @@
-import React from 'react';
+import { Container } from 'styles/Base.styled';
 
 export default function Movies() {
-  return <div>Movies</div>;
+  return (
+    <Container>
+      <div>Movies</div>
+    </Container>
+  );
 }
