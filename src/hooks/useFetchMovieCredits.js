@@ -28,7 +28,7 @@ export const useFetchMovieCredits = () => {
     return () => {
       abortController ?? abortController.abort();
     };
-  }, []);
+  }, [movieId]);
 
   return { credits, isLoading, fetchError };
 };
