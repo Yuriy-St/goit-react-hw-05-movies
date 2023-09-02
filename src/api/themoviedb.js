@@ -2,9 +2,12 @@ import axios from 'axios';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
+const DEF_PARAMS = {
+  language: 'en-US',
+};
+
 const DEF_OPTIONS = {
   method: 'GET',
-  params: { language: 'en-US' },
   headers: {
     accept: 'application/json',
     Authorization:
@@ -14,25 +17,42 @@ const DEF_OPTIONS = {
 
 export const fetchTrendingMovies = () => {
   const url = `${BASE_URL}/trending/movie/day`;
-  return tmdbProcessQuery(url);
+  return tmdbProcessQuery({ url });
 };
 
 export const fetchMovieById = id => {
   const url = `${BASE_URL}/movie/${id}`;
-  return tmdbProcessQuery(url);
+  return tmdbProcessQuery({ url });
 };
 
 export const fetchMovieCredits = id => {
   const url = `${BASE_URL}/movie/${id}/credits`;
-  return tmdbProcessQuery(url);
+  return tmdbProcessQuery({ url });
 };
 
-const tmdbProcessQuery = async url => {
+export const fetchMovieReviews = id => {
+  const url = `${BASE_URL}/movie/${id}/reviews`;
+  return tmdbProcessQuery({ url });
+};
+
+export const searchMovies = query => {
+  const url = `${BASE_URL}/search/movie`;
+  const params = {
+    query,
+    include_adult: 'false',
+    language: 'en-US',
+    page: '1',
+  };
+  return tmdbProcessQuery({ url, params });
+};
+
+const tmdbProcessQuery = async ({ url, params = {} }) => {
   const controller = new AbortController();
 
   const options = {
     ...DEF_OPTIONS,
     url,
+    params: { ...DEF_PARAMS, ...params },
     signal: controller.signal,
   };
 

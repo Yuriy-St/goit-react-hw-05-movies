@@ -1,24 +1,19 @@
 import Loader from 'components/Loader/Loader';
 import MovieInfo from 'components/MovieInfo/MovieInfo';
 import { useFetchMovie } from 'hooks/useFetchMovie';
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-} from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import routes from 'routes';
 import { Container } from 'styles/Base.styled';
-import { Info, NavList } from './MovieDetails.styled';
+import { BackLink, Info, NavList } from './MovieDetails.styled';
 
 export default function MovieDetails() {
   const location = useLocation();
   const { movie, isLoading, fetchError } = useFetchMovie();
   const backLinkRef = location?.state?.from ?? '/';
-  
+
   return (
     <Container>
-      <Link to={backLinkRef}>Go back</Link>
+      <BackLink to={backLinkRef}>⬅ Go back</BackLink>
       {isLoading && <Loader />}
       {movie && <MovieInfo movie={movie} />}
       {fetchError && <div>{fetchError}</div>}

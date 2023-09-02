@@ -11,6 +11,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  /* padding-bottom: 1rem; */
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -40,7 +44,6 @@ address {
 button {
   cursor: pointer;
   color: inherit;
-  border: none;
 }
 
 img {

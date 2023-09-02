@@ -9,9 +9,9 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter basename="/goit-react-hw-05-movies">
-    {/* <React.StrictMode> */}
-    <Global styles={GlobalStyles} />
-    <App />
-    {/* </React.StrictMode> */}
+    <React.StrictMode>
+      <Global styles={GlobalStyles} />
+      <App />
+    </React.StrictMode>
   </BrowserRouter>
 );
