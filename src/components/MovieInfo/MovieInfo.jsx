@@ -10,7 +10,7 @@ import {
 } from './MovieInfo.styled';
 
 export default function MovieInfo({
-  movie: { title, overview, poster_path, genres, popularity },
+  movie: { title, overview, poster_path, genres, vote_average },
 }) {
   const BASE_URL = 'http://image.tmdb.org/t/p/w300';
 
@@ -26,7 +26,7 @@ export default function MovieInfo({
       </Poster>
       <InfoCard>
         <MovieTitle>{title}</MovieTitle>
-        <Score>User Score: {popularity}%</Score>
+        <Score>User Score: {Math.round(vote_average * 10)}%</Score>
         <Overview>
           <p className="title">Overview</p>
           <p>{overview}</p>
