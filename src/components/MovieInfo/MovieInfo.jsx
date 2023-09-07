@@ -17,7 +17,12 @@ export default function MovieInfo({
   return (
     <MovieCard>
       <Poster>
-        <img src={`${BASE_URL}${poster_path}`} alt={title} />
+        <img
+          src={`${BASE_URL}${poster_path}`}
+          alt={title}
+          width="300"
+          height="450"
+        />
       </Poster>
       <InfoCard>
         <MovieTitle>{title}</MovieTitle>

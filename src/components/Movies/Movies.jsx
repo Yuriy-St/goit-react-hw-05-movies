@@ -2,6 +2,7 @@ import Loader from 'components/Loader/Loader';
 import MoviesList from 'components/MovieList/MoviesList';
 import SearchForm from 'components/SearchForm/SearchForm';
 import { useSearchMoveis } from 'hooks/useSearchMovies';
+import { Suspense } from 'react';
 import { Container } from 'styles/Base.styled';
 
 export default function Movies() {
@@ -12,11 +13,13 @@ export default function Movies() {
 
   return (
     <Container>
-      <SearchForm onSubmit={onHandleSubmit} />
-      {isLoading && <Loader />}
-      {fetchError && <p>{fetchError}</p>}
-      {hasMovies && <MoviesList movies={movies} />}
-      {noResults && <p>Nothing found 😕</p>}
+      <Suspense fallback={<div>Loading...</div>}>
+        <SearchForm onSubmit={onHandleSubmit} />
+        {isLoading && <Loader />}
+        {fetchError && <p>{fetchError}</p>}
+        {hasMovies && <MoviesList movies={movies} />}
+        {noResults && <p>Nothing found 😕</p>}
+      </Suspense>
     </Container>
   );
 }

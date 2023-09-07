@@ -10,6 +10,7 @@ import {
   Thumb,
 } from './Cast.styled';
 import placeholder from 'images/avatar-placeholder.png';
+import { Suspense } from 'react';
 
 export default function Cast() {
   const { credits, isLoading, fetchError } = useFetchMovieCredits();
@@ -20,27 +21,31 @@ export default function Cast() {
     <>
       {isLoading && <Loader />}
       {cast?.length > 0 && (
-        <CastList>
-          {cast.map(({ id, name, profile_path, character }) => (
-            <CastItem key={id}>
-              <PhotoWrapper>
-                <Photo
-                  src={
-                    profile_path
-                      ? `${BASE_URL}${profile_path}`
-                      : `${placeholder}`
-                  }
-                  alt={name}
-                />
-              </PhotoWrapper>
+        <Suspense fallback={<div>Loading...</div>}>
+          <CastList>
+            {cast.map(({ id, name, profile_path, character }) => (
+              <CastItem key={id}>
+                <PhotoWrapper>
+                  <Photo
+                    src={
+                      profile_path
+                        ? `${BASE_URL}${profile_path}`
+                        : `${placeholder}`
+                    }
+                    alt={name}
+                    width="185"
+                    height="280"
+                  />
+                </PhotoWrapper>
 
-              <Thumb>
-                <Name>{name}</Name>
-                <Character>Character: {character}</Character>
-              </Thumb>
-            </CastItem>
-          ))}
-        </CastList>
+                <Thumb>
+                  <Name>{name}</Name>
+                  <Character>Character: {character}</Character>
+                </Thumb>
+              </CastItem>
+            ))}
+          </CastList>
+        </Suspense>
       )}
       {fetchError && <p>{fetchError}</p>}
     </>

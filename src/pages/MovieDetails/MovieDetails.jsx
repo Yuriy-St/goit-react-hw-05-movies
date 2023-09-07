@@ -5,6 +5,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import routes from 'routes';
 import { Container } from 'styles/Base.styled';
 import { BackLink, Info, NavList } from './MovieDetails.styled';
+import { Suspense } from 'react';
 
 export default function MovieDetails() {
   const location = useLocation();
@@ -21,15 +22,21 @@ export default function MovieDetails() {
         <p>Additional information</p>
         <NavList>
           <li>
-            <NavLink to={routes.CAST}>Cast</NavLink>
+            <NavLink to={routes.CAST} state={{ from: backLinkRef }}>
+              Cast
+            </NavLink>
           </li>
           <li>
-            <NavLink to={routes.REVIEWS}>Reviews</NavLink>
+            <NavLink to={routes.REVIEWS} state={{ from: backLinkRef }}>
+              Reviews
+            </NavLink>
           </li>
         </NavList>
       </Info>
 
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 }

@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { Header, Nav, NavLinkStyled } from './Home.styled';
 import { Container } from 'styles/Base.styled';
 import routes from 'routes';
+import { Suspense } from 'react';
 
 export default function Home() {
   return (
@@ -14,7 +15,9 @@ export default function Home() {
           </Nav>
         </Container>
       </Header>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

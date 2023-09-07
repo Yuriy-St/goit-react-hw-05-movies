@@ -6,6 +6,7 @@ import {
   ReviewItem,
   ReviewsContainer,
 } from './Reviews.styled';
+import { Suspense } from 'react';
 
 export default function Reviews() {
   const { response, isLoading, fetchError } = useFetchMovieReviews();
@@ -19,19 +20,21 @@ export default function Reviews() {
     <>
       {isLoading && <Loader />}
       {hasResults && (
-        <ReviewsContainer>
-          {results.map(({ id, author, content, url }) => (
-            <ReviewItem key={id}>
-              <Author>
-                <span className="tag">Author:</span> {author}
-              </Author>
-              <Content>
-                <p>{content}</p>
-                <a href={url}>read full review</a>
-              </Content>
-            </ReviewItem>
-          ))}
-        </ReviewsContainer>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ReviewsContainer>
+            {results.map(({ id, author, content, url }) => (
+              <ReviewItem key={id}>
+                <Author>
+                  <span className="tag">Author:</span> {author}
+                </Author>
+                <Content>
+                  <p>{content}</p>
+                  <a href={url}>read full review</a>
+                </Content>
+              </ReviewItem>
+            ))}
+          </ReviewsContainer>
+        </Suspense>
       )}
       {noResults && <p>Sorry we can't find something 😕</p>}
       {fetchError && <p>{fetchError}</p>}
